@@ -51,14 +51,13 @@ const UpdateForm = forwardRef(({ handleUpdate, expense }, ref) => {
     }));
   };
 
-  const handleSubmit = (e) => {
+ const handleSubmit = (e) => {
     e.preventDefault();
 
     // Check if the amount is empty
-    const amount = updatedExpense.amount.trim() === '' ? 0 : parseFloat(updatedExpense.amount);
-
-    handleUpdate(id, { ...updatedExpense, amount });
-    handleClose();
+    const trimmedAmount = String(updatedExpense.amount).trim();
+  handleUpdate(id, { ...updatedExpense, amount: trimmedAmount });
+  handleClose();
   };
 
   return (
@@ -105,6 +104,20 @@ const UpdateForm = forwardRef(({ handleUpdate, expense }, ref) => {
                 style={{ height: '100px' }}
               />
             </Form.Group>
+            <Form.Group className="mb-3" controlId="formBasicPassword">
+              <Form.Label>Paid Buy</Form.Label>
+              <Form.Select
+                aria-label="Default select example"
+                name="paidBy"
+                value={updatedExpense.paidBy}
+                onChange={handleChange}
+              >
+                <option value="Cash in Hand">Cash in Hand</option>
+                <option value="Usama Ali"> Usama Ali</option>
+                <option value="Sir Mujassir">Sir Mujassir</option>
+                <option value="Sir Omer Aziz">Sir Omer Aziz</option>
+              </Form.Select>
+            </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Label>Amount</Form.Label>
               <Form.Control
@@ -114,6 +127,7 @@ const UpdateForm = forwardRef(({ handleUpdate, expense }, ref) => {
                 onChange={handleChange}
               />
             </Form.Group>
+            
             <Form.Group className="mb-3" controlId="formBasicPassword">
               <Form.Label>Expense Type</Form.Label>
               <Form.Select

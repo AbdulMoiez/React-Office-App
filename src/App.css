@@ -25,6 +25,12 @@
   color: #dc3545;
 
 }
+#Spinner{
+  display: grid;
+  place-items: center;
+  font-size: 70px;
+  margin-top: 20%;
+}
 .icon-btn:hover{
   cursor: pointer;
 }

@@ -173,6 +173,7 @@ const handleShowAll = () => {
       <td>{element.date}</td>
       <td>{element.account}</td>
       <td>{element.comments}</td>
+      <td>{element.paidBy}</td>
       <td>{element.amount}</td>
       <td>{element.type}</td>
       <td>
@@ -260,6 +261,7 @@ const handleShowAll = () => {
             <th scope="col">Date</th>
             <th scope="col">Account</th>
             <th scope="col">Comments</th>
+            <th scope="col">Paid by</th>
             <th scope="col">Amount</th>
             <th scope="col">Type</th>
             <th scope="col">Action</th>

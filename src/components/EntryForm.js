@@ -22,6 +22,7 @@ const EntryForm = forwardRef((props, ref) => {
     account: 'Electricity Bill',
     comments: '',
     amount: '',
+    paidBy: 'Cash in Hand',
     type: 'Office Expense',
   });
 
@@ -92,6 +93,7 @@ const errorMessage = () => {
       account: 'Electricity Bill',
       comments: '',
       amount: '',
+      paidBy: 'Cash in Hand',
       type: 'Office Expense',
     });
   };
@@ -157,6 +159,20 @@ const errorMessage = () => {
                 value={expenseData.amount}
                 onChange={handleInputChange}
               />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formBasicPassword">
+              <Form.Label>Paid Buy</Form.Label>
+              <Form.Select
+                aria-label="Default select example"
+                name="paidBy"
+                value={expenseData.paidBy}
+                onChange={handleInputChange}
+              >
+                <option value="Cash in Hand">Cash in Hand</option>
+                <option value="Usama Ali"> Usama Ali</option>
+                <option value="Sir Mujassir">Sir Mujassir</option>
+                <option value="Sir Omer Aziz">Sir Omer Aziz</option>
+              </Form.Select>
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicPassword">
               <Form.Label>Expense Type</Form.Label>

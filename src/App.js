@@ -1,6 +1,8 @@
 import './App.css';
-import ModalForm1 from './components/ModalForm1';
+import React, { Suspense } from 'react';
+// import ModalForm1 from './components/ModalForm1';
 import 'react-toastify/dist/ReactToastify.css';
+import Spinner from 'react-bootstrap/Spinner';
 // import the library
 import { library } from '@fortawesome/fontawesome-svg-core'
 
@@ -8,13 +10,16 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
 import { fas } from '@fortawesome/free-solid-svg-icons'
 import { far } from '@fortawesome/free-regular-svg-icons'
-
-// import ExpenseListView from './components/expense-list-view';
+const ModalForm = React.lazy(() => import('./components/ModalForm1'));
 
 function App() {
     return(
         <>
-  <ModalForm1/>
+<Suspense fallback={<div id='Spinner'>
+    <Spinner animation="grow" size="lg" />
+</div>}>
+        <ModalForm />
+      </Suspense>
  </>
     )
 }
