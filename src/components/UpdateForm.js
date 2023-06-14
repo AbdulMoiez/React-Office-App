@@ -1,20 +1,42 @@
 import React, { forwardRef, useImperativeHandle, useState } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
+import Firebase from '../Firebase'
 
 const UpdateForm = forwardRef(({ handleUpdate, expense }, ref) => {
   const [updatedExpense, setUpdatedExpense] = useState({ ...expense });
+  const [id,setID] = useState();
   const [show, setShow] = useState(false);
 
   useImperativeHandle(ref, () => ({
     openModalUpdate: (id) => {
       console.log(id);
-      const expenseData = localStorage.getItem('expenseList');
-      const parsedData = JSON.parse(expenseData);
-      const selectedExpense = parsedData.find((item) => item.id === id);
-      setUpdatedExpense(selectedExpense);
-      setShow(true);
+
+      // Set the ID state with the Firebase ID
+      setID(id);
+    
+      // Fetch document data from Firestore
+      Firebase.firestore()
+        .collection('Expenses-Details')
+        .doc(id)
+        .get()
+        .then((doc) => {
+          if (doc.exists) {
+            // Document found, access its data
+            const selectedExpense = { id: doc.id, ...doc.data() };
+            console.log(selectedExpense);
+            setUpdatedExpense(selectedExpense);
+            setShow(true);
+          } else {
+            // Document does not exist
+            console.log('Document not found!');
+          }
+        })
+        .catch((error) => {
+          console.error('Error fetching document:', error);
+        });
     },
   }));
 
@@ -31,7 +53,7 @@ const UpdateForm = forwardRef(({ handleUpdate, expense }, ref) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleUpdate(updatedExpense);
+    handleUpdate(id , updatedExpense);
     handleClose();
   };
 
@@ -61,12 +83,12 @@ const UpdateForm = forwardRef(({ handleUpdate, expense }, ref) => {
                 onChange={handleChange}
               >
                 <option value="Electricity Bill">Electricity Bill</option>
+                <option value="Petty Cash">Petty Cash</option>
                 <option value="Internet Bill">Internet Bill</option>
                 <option value="Water Filling">Water Filling</option>
                 <option value="Guest Refreshment">Guest Refreshment</option>
                 <option value="Meals & Tips">Meals & Tips</option>
                 <option value="Miscellaneous">Miscellaneous</option>
-                <option value="PettyCash">Petty Cash</option>
               </Form.Select>
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicPassword">
@@ -96,8 +118,9 @@ const UpdateForm = forwardRef(({ handleUpdate, expense }, ref) => {
                 value={updatedExpense.type}
                 onChange={handleChange}
               >
-                <option value="Expense">Expense</option>
-                <option value="Income">[Petty Cash]</option>
+                <option value="Office Expense">Office Expense</option>
+                <option value="Common Expense">Common Expense</option>
+                <option value="Petty Cash">Petty Cash</option>
               </Form.Select>
             </Form.Group>
           </Form>

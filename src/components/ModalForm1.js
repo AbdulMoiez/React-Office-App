@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
-import Lottie from "lottie-react";
-import Circle from "./Circle.json";
+import 'bootstrap/dist/css/bootstrap.min.css';
+// import Lottie from "lottie-react";
+// import Circle from "./Circle.json";
 import DelModal from './DelModal';
 import EntryForm from './EntryForm';
 import ExpenseListView from './expense-list-view';
@@ -13,37 +14,20 @@ function ModalForm1() {
   const childRefEntry = useRef();
   const childRefUpdate = useRef();
   const [transactions, setTransactions] = useState([]);
-  const [isLocalStorageEmpty, setIsLocalStorageEmpty] = useState(true);
+  // const [isLocalStorageEmpty, setIsLocalStorageEmpty] = useState(true);
   const [isToastVisible, setIsToastVisible] = useState(false);
-  const [totalExpense, setTotalExpense] = useState(0);
-  const [totalIncome, setTotalIncome] = useState(0);
 
   useEffect(() => {
     const localStorageData = localStorage.getItem('expenseList');
     const parsedData = localStorageData ? JSON.parse(localStorageData) : [];
     setTransactions(parsedData);
 
-    const isLocalStorageEmpty = parsedData.length === 0;
-    setIsLocalStorageEmpty(isLocalStorageEmpty);
+    // const isLocalStorageEmpty = parsedData.length === 0;
+    // // setIsLocalStorageEmpty(isLocalStorageEmpty);
 
-    calculateTotal(parsedData);
   }, []);
 
-  const calculateTotal = (data) => {
-    let expense = 0;
-    let income = 0;
 
-    data.forEach((transaction) => {
-      if (transaction.type === 'Expense') {
-        expense += parseFloat(transaction.amount);
-      } else {
-        income += parseFloat(transaction.amount);
-      }
-    });
-
-    setTotalExpense(expense);
-    setTotalIncome(income);
-  };
 
   const deleteEntry = (id) => {
     childRefDel.current.openModalDel(id);
@@ -56,7 +40,7 @@ function ModalForm1() {
     localStorage.setItem('expenseList', JSON.stringify(updatedData));
     setIsToastVisible(true);
     setTimeout(() => setIsToastVisible(false), 2000);
-    calculateTotal(updatedData);
+    
   };
 
   const handleDelete = (id) => {
@@ -65,7 +49,7 @@ function ModalForm1() {
     localStorage.setItem('expenseList', JSON.stringify(updatedData));
     setIsToastVisible(true);
     setTimeout(() => setIsToastVisible(false), 2000);
-    calculateTotal(updatedData);
+   
   };
 
   const handleUpdate = (updatedExpense) => {
@@ -86,12 +70,12 @@ function ModalForm1() {
     localStorage.setItem('expenseList', JSON.stringify(updatedData));
     setIsToastVisible(true);
     setTimeout(() => setIsToastVisible(false), 2000);
-    calculateTotal(updatedData);
+    
   };
 
-  useEffect(() => {
-    setIsLocalStorageEmpty(transactions.length === 0);
-  }, [transactions]);
+  // useEffect(() => {
+  //   setIsLocalStorageEmpty(transactions.length === 0);
+  // }, [transactions]);
 
   return (
     <>
@@ -115,14 +99,9 @@ function ModalForm1() {
 
         <UpdateForm ref={childRefUpdate} />
 
-        {!isLocalStorageEmpty && (
-  <div>
-    <h6>Total Expense: {totalExpense}</h6>
-    <h6>Total Petty Cash: {totalIncome}</h6>
-  </div>
-)}
+  
 
-        <div>
+        {/* <div>
           {isLocalStorageEmpty && (
             <div id="emptyMessage">
               <h1 id="alert">
@@ -136,7 +115,7 @@ function ModalForm1() {
               />
             </div>
           )}
-        </div>
+        </div> */}
 
         {isToastVisible && (
           <div id="toast">

@@ -1,31 +1,29 @@
 import React, { useState, forwardRef, useImperativeHandle } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import '../App.css';
 
-const DelModal = forwardRef((props, ref) => {
+const DelModal = forwardRef(({ handleDelete }, ref) => {
+  const [deleteExpense, setDeleteExpense] = useState(null);
   const [show, setShow] = useState(false);
-  const [showToast, setShowToast] = useState(false);
 
-  useImperativeHandle(ref, () => ({
-    openModalDel(id) {
-      console.log('open modal Del', id);
-      localStorage.setItem('id', JSON.stringify(id));
-      setShow(true); // Show the modal
-    },
-    Delete() {
-      const ID = JSON.parse(localStorage.getItem('id'));
-      console.log('Deleting is working ');
+  const openModalDel = (expenseId) => {
+    console.log('open modal Del', expenseId);
+    setDeleteExpense(expenseId);
+    setShow(true); // Show the modal
+  };
 
-      props.handleDelete(ID); // Call the handleDelete prop with the ID
-
-      setShow(false); // Hide the modal
-      setShowToast(true); // Show the toast message
-      setTimeout(() => setShowToast(false), 2000); // Hide the toast message after 2 seconds
-    },
-  }));
+  const handleSubmit = () => {
+    handleDelete(deleteExpense);
+    handleClose();
+  };
 
   const handleClose = () => setShow(false);
+
+  useImperativeHandle(ref, () => ({
+    openModalDel,
+  }));
 
   return (
     <>
@@ -38,24 +36,12 @@ const DelModal = forwardRef((props, ref) => {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="danger" onClick={ref.current?.Delete}>
+          <Button variant="danger" onClick={handleSubmit}>
             Delete
           </Button>
         </Modal.Footer>
       </Modal>
-      <div>
-      
-        {showToast && (
-          <div id="toast">
-            <div id="img">
-              <i className="fa-solid fa-thumbs-up fa-bounce"></i>
-            </div>
-            <div id="desc">
-              <i className="fa-solid fa-face-smile-beam fa-bounce"></i>
-            </div>
-          </div>
-        )}
-      </div>
+   
     </>
   );
 });

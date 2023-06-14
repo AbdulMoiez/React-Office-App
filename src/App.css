@@ -46,6 +46,29 @@
 #TotalInc{
   margin-left: 10px;
 }  
+#searchDiv{
+  display: flex;
+  justify-content: flex-start;
+  margin: 15px ;
+}
+#ExpenseForm{
+display: flex;
+}
+#searchBtn{
+  margin-left: 22%;
+}
+
+
+#ELV-col-1{
+  padding: 5% 0 0 0;
+  /* border: 1px solid #000;
+  border-radius: 5px; */
+}
+#summary{
+  background-color: #212529;
+  color: #fff;
+  padding: 5px;
+}
 /* New Post Message CSS */
 #toast {
   visibility: hidden;
