@@ -53,7 +53,18 @@ const childRefDel = useRef();
       theme: "dark",
     });
   };
-
+  const errorMessage = () => {
+    toast.error('Some error occurs to perform the task !', {
+      position: "bottom-center",
+      autoClose: 1200,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+  });
+  }
   const handleUpdate = (documentId, updatedExpense) => {
     successMessage();
     console.log(documentId);
@@ -67,6 +78,7 @@ const childRefDel = useRef();
       })
       .catch((error) => {
         console.error('Error updating document:', error);
+        errorMessage()
       });
   };
 
@@ -82,6 +94,7 @@ const childRefDel = useRef();
       })
       .catch((error) => {
         console.error('Error removing document: ', error);
+        errorMessage()
       });
   };
 
