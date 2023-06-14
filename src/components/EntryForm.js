@@ -62,25 +62,31 @@ const errorMessage = () => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    const { handleSave} = props;
-
-    const newExpense = { ...expenseData };
-
+    const { handleSave } = props;
+  
+    // Check if the amount is empty
+    const amount = expenseData.amount.trim() === '' ? 0 : parseFloat(expenseData.amount);
+  
+    const newExpense = {
+      ...expenseData,
+      amount: amount,
+    };
+  
     // Store the data in Firestore
     const db = firebase.firestore();
     db.collection('Expenses-Details')
-    .add(newExpense)
-    .then((docRef) => {
-        successMessage()
+      .add(newExpense)
+      .then((docRef) => {
+        successMessage();
         const generatedId = docRef.id;
         console.log('Auto-generated ID:', generatedId);
         handleSave({ id: generatedId, ...newExpense });
       })
       .catch((error) => {
-        errorMessage()
+        errorMessage();
         console.error('Error adding expense to Firestore:', error);
       });
-
+  
     setExpenseData({
       date: new Date().toISOString().slice(0, 10),
       account: 'Electricity Bill',
@@ -88,8 +94,6 @@ const errorMessage = () => {
       amount: '',
       type: 'Office Expense',
     });
-
-   
   };
 
   return (

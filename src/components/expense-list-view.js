@@ -28,6 +28,7 @@ const childRefDel = useRef();
   const [filteredList, setFilteredList] = useState([]);
   const [filterType, setFilterType] = useState('');
   const [open, setOpen] = useState(false);
+  // const [currentDate, setCurrentDate] = useState('');
 
   const successMessage = () => {
     toast.success('Updated SuccessFully!', {
@@ -117,45 +118,53 @@ const childRefDel = useRef();
     let expenseSum = 0;
     let pettyCashSum = 0;
     let commonExpenseSum = 0;
-
-    list.forEach((element) => {
+  
+    filteredList.forEach((element) => {
       if (element.type === 'Office Expense') {
         expenseSum += parseFloat(element.amount);
       } else if (element.type === 'Petty Cash') {
         pettyCashSum += parseFloat(element.amount);
-      }
-      else if (element.type === 'Common Expense') {
+      } else if (element.type === 'Common Expense') {
         commonExpenseSum += parseFloat(element.amount);
       }
     });
-
+  
     setExpenseTotal(expenseSum);
     setPettyCashTotal(pettyCashSum);
-    setCommonExpenseTotal(commonExpenseSum)
-  }, [list]);
+    setCommonExpenseTotal(commonExpenseSum);
+  }, [filteredList]);
+  
+  const handleTodayFilter = () => {
+    const today = new Date().toISOString().slice(0, 10);
+    setSearchTerm(today); // Set the search term to today's date
+    setFilterType(''); // Clear the filter type
+  };
 
   useEffect(() => {
-    // Filter list based on the search term and filter type
-    const filteredList = list.filter((element) =>
-      Object.values(element).some((value) =>
-        value.toString().toLowerCase().includes(searchTerm.toLowerCase())
-      )
-    );
+   // Filter list based on the search term and filter type
+  const filteredList = list.filter((element) =>
+  Object.values(element).some((value) =>
+    value.toString().toLowerCase().includes(searchTerm.toLowerCase())
+  )
+);
 
-    if (filterType) {
-      const filteredListByType = filteredList.filter((element) => element.type === filterType);
-      setFilteredList(filteredListByType);
-    } else {
-      setFilteredList(filteredList);
-    }
-  }, [searchTerm, list, filterType]);
+if (filterType) {
+  const filteredListByType = filteredList.filter((element) => element.type === filterType);
+  setFilteredList(filteredListByType);
+} else {
+  setFilteredList(filteredList);
+}
+}, [searchTerm, list, filterType]);
 
-  const handleFilter = (type) => {
-    setFilterType(type);
-  };
-  const handleShowAll = () => {
-    setFilterType('');
-  };
+const handleFilter = (type) => {
+  setFilterType(type);
+  setSearchTerm(''); // Clear the search term
+};
+
+const handleShowAll = () => {
+  setFilterType('');
+  setSearchTerm(''); // Clear the search term
+};
 
   const subtractResult = pettyCashTotal - expenseTotal;
 
@@ -179,19 +188,22 @@ const childRefDel = useRef();
 
   return (
     <div>
+    
       <Container  fluid='xxl'>
       <Row>
         <Col id='ELV-col-1'> 
-        
-        <Button
-        className='my-2'
-        variant="dark"
-        onClick={() => setOpen(!open)}
-        aria-controls="example-collapse-text"
-        aria-expanded={open}
-      >
-        View Summary Details
-      </Button>
+       {filteredList.length > 0 &&(
+  <Button
+  className='my-2'
+  variant="dark"
+  onClick={() => setOpen(!open)}
+  aria-controls="example-collapse-text"
+  aria-expanded={open}
+>
+  View Summary Details
+</Button>
+       )} 
+      
       <div style={{ minHeight: '150px' }}>
         <Collapse in={open} dimension="width">
           <div id="example-collapse-text">
@@ -219,7 +231,7 @@ const childRefDel = useRef();
         <div>
 
         
-      <InputGroup size="md" style={{width:'181%'}}>
+      <InputGroup size="md" style={{width:'131%'}}>
         <InputGroup.Text id="inputGroup-sizing-md"><FontAwesomeIcon icon="fa-solid fa-magnifying-glass-arrow-right" beatFade /></InputGroup.Text>
         <Form.Control
           aria-label="Large"
@@ -236,6 +248,8 @@ const childRefDel = useRef();
         <Button variant="dark" className='mx-2' onClick={() => handleFilter('Office Expense')}>Expense</Button>
         <Button variant="dark" className='mx-2' onClick={() => handleFilter('Petty Cash')}>Petty Cash</Button>
         <Button variant="dark" className='mx-2' onClick={() => handleFilter('Common Expense')}>Common Expense</Button>
+        <Button variant="dark" className='mx-2' onClick={handleTodayFilter}>Today</Button>
+
         <Button variant="dark" className='mx-2' onClick={handleShowAll}>All</Button>
         </div>
       </div>
@@ -265,7 +279,9 @@ const childRefDel = useRef();
         </Col>
         
       </Row>
-      {filteredList.length === 0 && (
+    
+    </Container>
+    {filteredList.length === 0 && (
         <div id="emptyMessage">
           <h1 id="alert">
             There's Nothing to Show <i className="fa-solid fa-exclamation fa-bounce"></i>
@@ -273,7 +289,6 @@ const childRefDel = useRef();
           <Lottie id="alertPic" animationData={Circle} style={{ height: 300, width: 300 }} />
         </div>
       )}
-    </Container>
       <div>
      
       </div>

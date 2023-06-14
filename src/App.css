@@ -17,7 +17,6 @@
 #emptyMessage{
   display: grid;
   place-items: center;
-  margin-top: 10%;
   color: #a4a9ad;
 }
 .icon-btn{
@@ -55,7 +54,7 @@
 display: flex;
 }
 #searchBtn{
-  margin-left: 22%;
+  margin-left: 12%;
 }
 
 

@@ -53,7 +53,11 @@ const UpdateForm = forwardRef(({ handleUpdate, expense }, ref) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleUpdate(id , updatedExpense);
+
+    // Check if the amount is empty
+    const amount = updatedExpense.amount.trim() === '' ? 0 : parseFloat(updatedExpense.amount);
+
+    handleUpdate(id, { ...updatedExpense, amount });
     handleClose();
   };
 
