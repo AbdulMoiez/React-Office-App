@@ -13,7 +13,7 @@ import UpdateForm from './UpdateForm';
 import Lottie from 'lottie-react';
 import Circle from './Circle.json';
 import Firebase from '../Firebase';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function ExpenseListView() {
@@ -31,12 +31,26 @@ const childRefDel = useRef();
 
   const successMessage = () => {
     toast.success('Updated SuccessFully!', {
-      position: toast.POSITION.BOTTOM_CENTER,
+      position: "bottom-center",
+      autoClose: 1200,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
     });
   };
   const deleteMessage = () => {
     toast.error('Successfully Deleted!', {
-      position: toast.POSITION.BOTTOM_CENTER,
+      position: "bottom-center",
+      autoClose: 1200,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
     });
   };
 
@@ -141,10 +155,10 @@ const childRefDel = useRef();
       <td>{element.type}</td>
       <td>
         <button className="icon-btn1" onClick={() => childRefUpdate.current.openModalUpdate(element.id)}>
-          <i className="fa fa-pencil" />
+        <FontAwesomeIcon icon="fa-solid fa-pen-to-square" />
         </button>
         <button className="icon-btn" onClick={() => childRefDel.current.openModalDel(element.id)}>
-          <i className="fa fa-trash" />
+        <FontAwesomeIcon icon="fa-solid fa-trash-arrow-up" />
         </button>
       </td>
     </tr>
@@ -187,13 +201,13 @@ const childRefDel = useRef();
        </Col>
         <Col xs={9}>
         <div>
-      <ToastContainer />
+      
       <div id='searchDiv'>
         <div>
 
         
       <InputGroup size="md" style={{width:'181%'}}>
-        <InputGroup.Text id="inputGroup-sizing-md"><i class="fa-solid fa-magnifying-glass fa-bounce"></i></InputGroup.Text>
+        <InputGroup.Text id="inputGroup-sizing-md"><FontAwesomeIcon icon="fa-solid fa-magnifying-glass-arrow-right" beatFade /></InputGroup.Text>
         <Form.Control
           aria-label="Large"
           aria-describedby="inputGroup-sizing-md"

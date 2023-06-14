@@ -37,13 +37,27 @@ const EntryForm = forwardRef((props, ref) => {
   };
   const successMessage = () => {
     toast.success('Save SuccessFully!', {
-      position: toast.POSITION.BOTTOM_CENTER,
+      position: "bottom-center",
+      autoClose: 1200,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
     });
   };
 
 const errorMessage = () => {
   toast.error('Error saving expense !', {
-    position: toast.POSITION.BOTTOM_CENTER
+    position: "bottom-center",
+    autoClose: 1200,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "dark",
 });
   };
   const handleSubmit = (e) => {
@@ -54,10 +68,10 @@ const errorMessage = () => {
 
     // Store the data in Firestore
     const db = firebase.firestore();
-    successMessage()
     db.collection('Expenses-Details')
-      .add(newExpense)
-      .then((docRef) => {
+    .add(newExpense)
+    .then((docRef) => {
+        successMessage()
         const generatedId = docRef.id;
         console.log('Auto-generated ID:', generatedId);
         handleSave({ id: generatedId, ...newExpense });
@@ -83,7 +97,7 @@ const errorMessage = () => {
     <ToastContainer />
       <Button variant="danger" onClick={handleShow}>
         Add New Expenses
-        <i className="fa-brands fa-slack fa-spin" />
+        
       </Button>
 
       <Modal show={show} onHide={handleClose}>
