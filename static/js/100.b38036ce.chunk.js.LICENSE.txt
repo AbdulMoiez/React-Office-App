@@ -254,5 +254,3 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-//! goToAndStop must be relative to the start of the current segment
