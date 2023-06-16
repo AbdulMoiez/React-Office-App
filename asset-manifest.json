@@ -1,12 +1,12 @@
 {
   "files": {
     "main.css": "/React-Office-App/static/css/main.57102f79.css",
-    "main.js": "/React-Office-App/static/js/main.70cd0d85.js",
+    "main.js": "/React-Office-App/static/js/main.c2ba9aa8.js",
     "static/js/398.0c2b0e67.chunk.js": "/React-Office-App/static/js/398.0c2b0e67.chunk.js",
     "static/js/787.0a10ec7e.chunk.js": "/React-Office-App/static/js/787.0a10ec7e.chunk.js",
     "static/js/632.1f9b1c8d.chunk.js": "/React-Office-App/static/js/632.1f9b1c8d.chunk.js",
     "static/js/721.19cc658f.chunk.js": "/React-Office-App/static/js/721.19cc658f.chunk.js",
-    "static/js/798.ec0f14f7.chunk.js": "/React-Office-App/static/js/798.ec0f14f7.chunk.js",
+    "static/js/798.47214931.chunk.js": "/React-Office-App/static/js/798.47214931.chunk.js",
     "static/js/722.98f8fe6b.chunk.js": "/React-Office-App/static/js/722.98f8fe6b.chunk.js",
     "static/js/243.ad1f1d03.chunk.js": "/React-Office-App/static/js/243.ad1f1d03.chunk.js",
     "static/js/100.adabafb4.chunk.js": "/React-Office-App/static/js/100.adabafb4.chunk.js",
@@ -15,12 +15,12 @@
     "static/css/256.39becb3c.chunk.css": "/React-Office-App/static/css/256.39becb3c.chunk.css",
     "index.html": "/React-Office-App/index.html",
     "main.57102f79.css.map": "/React-Office-App/static/css/main.57102f79.css.map",
-    "main.70cd0d85.js.map": "/React-Office-App/static/js/main.70cd0d85.js.map",
+    "main.c2ba9aa8.js.map": "/React-Office-App/static/js/main.c2ba9aa8.js.map",
     "398.0c2b0e67.chunk.js.map": "/React-Office-App/static/js/398.0c2b0e67.chunk.js.map",
     "787.0a10ec7e.chunk.js.map": "/React-Office-App/static/js/787.0a10ec7e.chunk.js.map",
     "632.1f9b1c8d.chunk.js.map": "/React-Office-App/static/js/632.1f9b1c8d.chunk.js.map",
     "721.19cc658f.chunk.js.map": "/React-Office-App/static/js/721.19cc658f.chunk.js.map",
-    "798.ec0f14f7.chunk.js.map": "/React-Office-App/static/js/798.ec0f14f7.chunk.js.map",
+    "798.47214931.chunk.js.map": "/React-Office-App/static/js/798.47214931.chunk.js.map",
     "722.98f8fe6b.chunk.js.map": "/React-Office-App/static/js/722.98f8fe6b.chunk.js.map",
     "243.ad1f1d03.chunk.js.map": "/React-Office-App/static/js/243.ad1f1d03.chunk.js.map",
     "100.adabafb4.chunk.js.map": "/React-Office-App/static/js/100.adabafb4.chunk.js.map",
@@ -30,6 +30,6 @@
   },
   "entrypoints": [
     "static/css/main.57102f79.css",
-    "static/js/main.70cd0d85.js"
+    "static/js/main.c2ba9aa8.js"
   ]
 }
